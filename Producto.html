@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Productos</title>
+  <link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+
+<body>
+
+<header class="header">
+  <h2>Sistema de Cotizaciones Transmova</h2>
+  <nav>
+    <a href="Cliente.html">Clientes</a>
+    <a href="Producto.html">Productos</a>
+    <a href="Cotizacion.html">Nueva cotización</a>
+    <a href="historial.html">Histórico</a>
+    <a href="Menu.html">Menú</a>
+  </nav>
+</header>
+
+  <h1>Productos</h1>
+
+  <form id="formProducto">
+    <label>Nombre del producto</label><br>
+    <input type="text" id="nombre_producto"><br><br>
+
+    <label>Precio</label><br>
+    <input type="number" id="precio"><br><br>
+
+    <label>Unidad</label><br>
+    <input type="text" id="unidad"><br><br>
+
+    <button type="button" onclick="guardarProducto()">Guardar producto</button>
+  </form>
+
+  <hr>
+
+ <h2>Productos registrados</h2>
+
+<table border="1" width="100%">
+  <thead>
+    <tr>
+      <th>Nombre del producto</th>
+      <th>Precio sugerido </th>
+      <th>Unidad</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody id="tablaProductos"></tbody>
+</table>
+
+    <script type="module" src="assets/auth.js"></script>
+    <script type="module" src="assets/productos.js"></script>
+
+
+</body>
+</html>

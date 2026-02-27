@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cotización</title>
+  <link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+
+
+<body>
+
+<header class="header">
+  <h2>Sistema de Cotizaciones Transmova</h2>
+  <nav>
+    <a href="Cliente.html">Clientes</a>
+    <a href="Producto.html">Productos</a>
+    <a href="Cotizacion.html">Nueva cotización</a>
+    <a href="historial.html">Histórico</a>
+    <a href="Menu.html">Menú</a>
+    
+  </nav>
+</header>
+
+
+<h1>Nueva Cotización</h1>
+
+<label>Cliente</label><br>
+<select id="clienteSelect"></select>
+
+<hr>
+
+<label>Producto</label><br>
+<select id="productoSelect"></select><br><br>
+
+<label>Precio</label><br>
+<input type="number" id="precio" step="0.01"><br><br>
+
+<label>Cantidad</label><br>
+<input type="number" id="cantidad" value="1"><br><br>
+
+<button onclick="agregarProducto()">Agregar producto</button>
+<button onclick="guardarCotizacion()">Guardar cotización y generar PDF</button>
+
+<hr>
+
+<h2>Detalle</h2>
+
+<table border="1" width="100%">
+  <thead>
+    <tr>
+      <th>Producto</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody id="detalleCotizacion"></tbody>
+</table>
+
+<h3>Total Cotización: $<span id="totalCotizacion">0</span></h3>
+
+<hr>
+
+<script type="module" src="assets/auth.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script type="module" src="assets/cotizaciones.js" defer></script>
+
+</body>
+</html>

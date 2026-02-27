@@ -1,0 +1,224 @@
+/* ==========================
+   RESET Y BASE
+========================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: #f4f6f8;
+  color: #333;
+  padding: 20px;
+}
+
+h1, h2, h3 {
+  font-weight: normal;
+  margin-bottom: 15px;
+}
+
+/* ==========================
+   HEADER GENERAL (FORMULARIOS)
+========================== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.header nav a {
+  margin-left: 15px;
+  font-size: 14px;
+  color: #2c3e50;
+  text-decoration: none;
+}
+
+.header nav a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================
+   HEADER DEL MENÚ PRINCIPAL
+========================== */
+.menu-header {
+  background: #1e293b;
+  padding: 20px;
+}
+
+.menu-header .header-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.menu-header h1 {
+  color: #ffffff;
+  font-size: 22px;
+  margin: 0;
+}
+
+.menu-header .logo {
+  height: 40px;
+  width: auto;
+}
+
+/* ==========================
+   MENÚ PRINCIPAL
+========================== */
+.menu-container {
+  max-width: 900px;
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.menu-card {
+  display: block;
+  background: #ffffff;
+  padding: 25px;
+  text-align: center;
+  text-decoration: none;
+  color: #0f172a;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.menu-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.menu-card.logout {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* ==========================
+   FORMULARIOS
+========================== */
+label {
+  font-size: 13px;
+}
+
+input, select {
+  width: 250px;
+  padding: 6px;
+  font-size: 13px;
+  margin-bottom: 10px;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+}
+
+input[type="number"] {
+  width: 120px;
+}
+
+/* ==========================
+   BOTONES
+========================== */
+button {
+  padding: 6px 12px;
+  font-size: 13px;
+  border: 1px solid #999;
+  background: #eaeaea;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+button:hover {
+  background: #dcdcdc;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ==========================
+   TABLAS
+========================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+th {
+  background: #e6e6e6;
+  font-weight: normal;
+  font-size: 13px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 6px;
+  font-size: 13px;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* ==========================
+   UTIL
+========================== */
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+@media (max-width: 768px) {
+
+  body {
+    padding: 10px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header nav {
+    margin-top: 8px;
+  }
+
+  .header nav a {
+    margin-left: 0;
+    margin-right: 10px;
+  }
+
+  input, select {
+    width: 100%;
+  }
+
+  .menu-header .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

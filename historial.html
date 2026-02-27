@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Historial de Cotizaciones</title>
+  <link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+
+
+<body>
+
+<header class="header">
+  <h2>Sistema de Cotizaciones Transmova</h2>
+  <nav>
+    <a href="Cliente.html">Clientes</a>
+    <a href="Producto.html">Productos</a>
+    <a href="Cotizacion.html">Nueva cotización</a>
+    <a href="historial.html">Histórico</a>
+    <a href="Menu.html">Menú</a>
+
+  </nav>
+</header>
+
+
+  <h1>Historial de Cotizaciones</h1>
+
+  <label>Filtrar por mes:</label>
+  <input type="month" id="filtroMes" onchange="cargarCotizaciones()">
+
+  <br><br>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Fecha</th>
+        <th>Total</th>
+        <th>PDF</th>
+      </tr>
+    </thead>
+    <tbody id="listaCotizaciones"></tbody>
+  </table>
+
+  <script type="module" src="assets/auth.js"></script>
+  <script type="module" src="assets/historico.js"></script>
+
+
+</body>
+</html>
+

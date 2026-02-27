@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>Clientes</title>
+  <link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+
+
+
+
+
+
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <img src="assets/img/logo.png" alt="Logo" class="logo">
+    <h2>Sistema de Cotizaciones</h2>
+  </div>
+
+  <nav>
+    <a href="Cliente.html">Clientes</a>
+    <a href="Producto.html">Productos</a>
+    <a href="Cotizacion.html">Nueva cotización</a>
+    <a href="historial.html">Histórico</a>
+    <a href="Menu.html">Menú</a>
+  </nav>
+</header>
+
+
+
+<h2>Registro de Cliente</h2>
+
+<form id="formCliente">
+  <input id="nombre_contacto" placeholder="Nombre contacto" required><br>
+  <input id="empresa" placeholder="Empresa"><br>
+  <input id="telefono" placeholder="Teléfono empresa"><br>
+  <input id="email" placeholder="Email" required><br>
+  <input id="telefono_contacto" placeholder="Teléfono contacto"><br>
+  <input id="nit" placeholder="NIT"><br>
+  <input id="ciudad" placeholder="ciudad"><br><br>
+
+<button type="button" onclick="guardarCliente()">Guardar cliente</button>
+
+</form>
+
+<hr>
+
+<h2>Clientes guardados</h2>
+
+<ul id="listaClientes">
+  <!-- aquí se cargarán los clientes -->
+</ul>
+
+<script type="module" src="assets/auth.js"></script>
+<script type="module" src="assets/clientes.js"></script>
+
+
+<script>
+  document.getElementById("formCliente").addEventListener("submit", function (e) {
+    e.preventDefault();
+    guardarCliente();
+  });
+</script>
+
+</body>
+
+<div id="mensaje"></div>
+
+</html>
