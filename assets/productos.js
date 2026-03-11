@@ -5,6 +5,10 @@ import { supabase } from "./supabase.js";
 ========================= */
 let productoEditandoId = null;
 let productosCache = [];
+function formatoCOP(valor) {
+  return Number(valor || 0).toLocaleString("es-CO");
+}
+
 
 /* =========================
    INIT
@@ -46,8 +50,8 @@ async function cargarProductos() {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${p.nombre_producto}</td>
-      <td>$${p.precio}</td>
-      <td>${p.unidad}</td>
+      <td>${formatoCOP(p.precio)}</td>
+      <td>${p.unidad}</td>   
       <td>
         <button class="btn-editar" data-id="${p.id}">✏️</button>
         <button class="btn-eliminar" data-id="${p.id}">🗑️</button>

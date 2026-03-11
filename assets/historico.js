@@ -41,7 +41,7 @@ window.cargarCotizaciones = async function () {
     tr.innerHTML = `
       <td>${c.consecutivo}</td>
       <td>${c.fecha}</td>
-      <td>$${Number(c.total).toFixed(2)}</td>
+      <td>$${Number(c.total).toLocaleString("es-CO")}</td>
       <td>${linkPdf}</td>
     `;
 
