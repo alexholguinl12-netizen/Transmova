@@ -21,24 +21,83 @@
   </nav>
 </header>
 
-
 <h1>Nueva Cotización</h1>
 
+<h3>Datos de la cotización</h3>
+
+<table width="100%">
+<tr>
+<td>
+
 <label>Cliente</label><br>
-<select id="clienteSelect"></select>
+<select id="clienteSelect"></select><br><br>
+
+<label>Evento</label><br>
+<input type="text" id="evento"><br><br>
+
+<label>Ciudad de ejecución</label><br>
+<input type="text" id="ciudad"><br><br>
+
+</td>
+
+<td>
+
+<label>Fecha de solicitud</label><br>
+<input type="date" id="fechaSolicitud"><br><br>
+
+<label>Fecha inicial</label><br>
+<input type="date" id="fechaInicial"><br><br>
+
+<label>Fecha final</label><br>
+<input type="date" id="fechaFinal"><br><br>
+
+<label>Forma de pago</label><br>
+<select id="formaPago">
+<option value="">Seleccione</option>
+<option value="Contado">Contado</option>
+<option value="Credito">Crédito</option>
+</select>
+
+</td>
+</tr>
+</table>
 
 <hr>
 
+<h3>Agregar producto</h3>
+
+<table width="100%">
+<tr>
+
+<td>
 <label>Producto</label><br>
-<select id="productoSelect"></select><br><br>
+<select id="productoSelect"></select>
+</td>
 
+<td>
 <label>Precio</label><br>
-<input type="number" id="precio" step="0.01"><br><br>
+<input type="number" id="precio" step="0.01">
+</td>
 
+<td>
+<label>Unidad</label><br>
+<input type="text" id="unidad">
+</td>
+
+<td>
 <label>Cantidad</label><br>
-<input type="number" id="cantidad" value="1"><br><br>
+<input type="number" id="cantidad" value="1">
+</td>
 
+<td style="vertical-align:bottom;">
 <button onclick="agregarProducto()">Agregar producto</button>
+</td>
+
+</tr>
+</table>
+
+<br>
+
 <button onclick="guardarCotizacion()">Guardar cotización y generar PDF</button>
 
 <hr>
@@ -46,15 +105,18 @@
 <h2>Detalle</h2>
 
 <table border="1" width="100%">
-  <thead>
-    <tr>
-      <th>Producto</th>
-      <th>Precio</th>
-      <th>Cantidad</th>
-      <th>Total</th>
-    </tr>
-  </thead>
-  <tbody id="detalleCotizacion"></tbody>
+<thead>
+<tr>
+<th>Producto</th>
+<th>Precio</th>
+<th>Unidad</th>
+<th>Cantidad</th>
+<th>Total</th>
+</tr>
+</thead>
+
+<tbody id="detalleCotizacion"></tbody>
+
 </table>
 
 <h3>Total Cotización: $<span id="totalCotizacion">0</span></h3>
