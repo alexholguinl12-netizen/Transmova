@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  // 🔹 Cargar listado apenas abre la página
+  //  Cargar listado apenas abre la página
   cargarClientes();
 });
 

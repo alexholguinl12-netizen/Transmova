@@ -11,48 +11,77 @@
 <header class="header">
   <h2>Sistema de Cotizaciones Transmova</h2>
   <nav>
+    <a href="Menu.html">Menú</a>
+    <a href="Proveedores.html">Proveedores</a>
     <a href="Cliente.html">Clientes</a>
     <a href="Producto.html">Productos</a>
     <a href="Cotizacion.html">Nueva cotización</a>
+    <a href="Correcciones.html">Correcciones</a>
     <a href="historial.html">Histórico</a>
-    <a href="Menu.html">Menú</a>
+    <a href="aprobaciones.html" id="menuAprobaciones">Aprobaciones</a>
   </nav>
 </header>
 
+<div class="container">
+
   <h1>Productos</h1>
 
-  <form id="formProducto">
-    <label>Nombre del producto</label><br>
-    <input type="text" id="nombre_producto"><br><br>
+  <!-- FORMULARIO -->
+  <div class="card">
+    <h3>Registrar / Editar producto</h3>
 
-    <label>Precio</label><br>
-    <input type="number" id="precio"><br><br>
+    <form id="formProducto">
 
-    <label>Unidad</label><br>
-    <input type="text" id="unidad"><br><br>
+      <div class="form-group">
+        <label>Nombre del producto</label>
+        <input type="text" id="nombre_producto" placeholder="Ej: Transporte urbano">
+      </div>
 
-    <button type="button" onclick="guardarProducto()">Guardar producto</button>
-  </form>
+      <div class="form-group">
+        <label>Costo</label>
+        <input type="number" id="costo" placeholder="Ej: 50000">
+      </div>
 
-  <hr>
+      <div class="form-group">
+        <label>Unidad</label>
+        <input type="text" id="unidad" placeholder="Ej: Servicio, Hora, Km">
+      </div>
 
- <h2>Productos registrados</h2>
+      <div class="form-group">
+        <label>Proveedor</label>
+        <select id="proveedorSelect"></select>
+      </div>
 
-<table border="1" width="100%">
-  <thead>
-    <tr>
-      <th>Nombre del producto</th>
-      <th>Precio sugerido </th>
-      <th>Unidad</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody id="tablaProductos"></tbody>
-</table>
+      <button type="button" class="btn" onclick="guardarProducto()">
+        💾 Guardar producto
+      </button>
 
-    <script type="module" src="assets/auth.js"></script>
-    <script type="module" src="assets/productos.js"></script>
+    </form>
+  </div>
 
+  <!-- TABLA -->
+  <div class="card">
+    <h2>Productos registrados</h2>
+
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Costo</th>
+          <th>Unidad</th>
+          <th>Proveedor</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tablaProductos"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<script type="module" src="assets/auth.js"></script>
+<script type="module" src="assets/productos.js"></script>
+<script type="module" src="assets/roles.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Correcciones</title>
+  <link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+
+<body>
+
+<header class="header">
+  <h2>Sistema de Cotizaciones Transmova</h2>
+  <nav>
+    <a href="Menu.html">Menú</a>
+    <a href="Proveedores.html">Proveedores</a>
+    <a href="Cliente.html">Clientes</a>
+    <a href="Producto.html">Productos</a>
+    <a href="Cotizacion.html">Nueva cotización</a>
+    <a href="Correcciones.html">Correcciones</a>
+    <a href="historial.html">Histórico</a>
+    <a href="aprobaciones.html" id="menuAprobaciones">Aprobaciones</a>
+    
+  </nav>
+</header>
+
+<h1>Correcciones de Cotización</h1>
+
+<h3>Buscar cotización</h3>
+
+<label>Consecutivo</label><br>
+<input type="text" id="buscarConsecutivo">
+<button onclick="buscarCotizacion()">Buscar</button>
+
+<hr>
+
+<h3>Datos cargados</h3>
+
+<div id="resultado"></div>
+
+<hr>
+
+<script type="module" src="assets/auth.js"></script>
+<script type="module" src="assets/correcciones.js"></script>
+<script type="module" src="assets/roles.js"></script>
+
+</body>
+</html>

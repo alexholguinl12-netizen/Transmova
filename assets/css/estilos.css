@@ -222,3 +222,211 @@ hr {
     align-items: flex-start;
   }
 }
+
+/* ==========================
+   CONTENEDOR GENERAL
+========================== */
+.container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* ==========================
+   TARJETAS (FORMULARIOS / TABLAS)
+========================== */
+.card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* ==========================
+   FORMULARIO MEJORADO
+========================== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  font-size: 13px;
+  margin-bottom: 4px;
+  color: #555;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* ==========================
+   BOTONES MODERNOS
+========================== */
+.btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background: #1d4ed8;
+}
+
+/* ==========================
+   TABLAS MODERNAS
+========================== */
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla th {
+  background: #f1f5f9;
+  font-size: 13px;
+  color: #333;
+}
+
+.tabla td {
+  font-size: 13px;
+}
+
+.tabla th,
+.tabla td {
+  padding: 8px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tabla tr:hover {
+  background: #f9fafb;
+}
+
+/* ==========================
+   BOTONES DE ACCIÓN
+========================== */
+.btn-editar {
+  background: #facc15;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-eliminar {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-editar:hover {
+  background: #eab308;
+}
+
+.btn-eliminar:hover {
+  background: #dc2626;
+}
+
+/* =========================
+   GRID 2 COLUMNAS
+========================= */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* =========================
+   CARDS
+========================= */
+.card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+/* =========================
+   FORM GROUP
+========================= */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+/* =========================
+   BOTÓN PRINCIPAL
+========================= */
+.btn-primary {
+  background: #2563eb;
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+/* =========================
+   ACCIONES
+========================= */
+.acciones {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tabla td,
+.tabla th {
+  padding: 8px;
+}
+
+.celda-numero {
+  text-align: right;
+}
+
+.celda-centro {
+  text-align: center;
+}
+
+.rent-baja {
+  color: #dc2626;
+  font-weight: bold;
+}
+
+.rent-alta {
+  color: #16a34a;
+  font-weight: bold;
+}
+
+.tabla th {
+  background: #f1f5f9;
+  text-align: center;
+}
+
+.tabla tr:hover {
+  background: #f9fafb;
+}

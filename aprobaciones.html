@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Aprobaciones</title>
+  <link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+
+<body>
+
+<header class="header">    
+<h2>Cotizaciones Pendientes</h2>
+<nav>
+    <a href="Menu.html">Menú</a>
+    <a href="Proveedores.html">Proveedores</a>
+    <a href="Cliente.html">Clientes</a>
+    <a href="Producto.html">Productos</a>
+    <a href="Cotizacion.html">Nueva cotización</a>
+    <a href="Correcciones.html">Correcciones</a>
+    <a href="historial.html">Histórico</a>
+    <a href="aprobaciones.html" id="menuAprobaciones">Aprobaciones</a>
+    
+</nav>
+</header>
+
+<h1>LISTA DE TAREAS DE APROBACIONES</h1>
+
+
+<table class="tabla">
+  <thead>
+    <tr>
+      <th>Consecutivo</th>
+      <th>Cliente</th>
+      <th>Costo</th>
+      <th>Venta</th>
+      <th>Rentabilidad</th>  
+      <th>Total</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody id="tablaAprobaciones"></tbody>
+</table>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script type="module" src="assets/aprobaciones.js"></script>
+<script type="module" src="assets/roles.js"></script>
+
+
+</body>
+</html>

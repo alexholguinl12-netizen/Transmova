@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Proveedores</title>
+  <link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+
+<body>
+
+<header class="header">
+  <h2>Sistema de Cotizaciones Transmova</h2>
+  <nav>
+    <a href="Menu.html">Menú</a>
+    <a href="Proveedores.html">Proveedores</a>
+    <a href="Cliente.html">Clientes</a>
+    <a href="Producto.html">Productos</a>
+    <a href="Cotizacion.html">Nueva cotización</a>
+    <a href="Correcciones.html">Correcciones</a>
+    <a href="historial.html">Histórico</a>
+    <a href="aprobaciones.html" id="menuAprobaciones">Aprobaciones</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <h1>Proveedores</h1>
+
+  <!-- FORMULARIO -->
+  <div class="card">
+
+    <h3>Registrar / Editar proveedor</h3>
+
+    <div class="form-group">
+      <label>Razón social</label>
+      <input id="razon_social">
+    </div>
+
+    <div class="form-group">
+      <label>NIT</label>
+      <input id="nit">
+    </div>
+
+    <div class="form-group">
+      <label>Teléfono empresa</label>
+      <input id="telefono_empresa">
+    </div>
+
+    <div class="form-group">
+      <label>Nombre contacto</label>
+      <input id="nombre_contacto">
+    </div>
+
+    <div class="form-group">
+      <label>Teléfono contacto</label>
+      <input id="telefono_contacto">
+    </div>
+
+    <button class="btn" onclick="guardarProveedor()">
+      💾 Guardar proveedor
+    </button>
+
+  </div>
+
+  <!-- TABLA -->
+  <div class="card">
+
+    <h2>Proveedores registrados</h2>
+
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>Razón Social</th>
+          <th>NIT</th>
+          <th>Teléfono</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody id="tablaProveedores"></tbody>
+    </table>
+
+  </div>
+
+</div>
+
+<script type="module" src="assets/Proveedores.js"></script>
+<script type="module" src="assets/roles.js"></script>
+
+</body>
+</html>

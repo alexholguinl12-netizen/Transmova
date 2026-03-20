@@ -5,127 +5,156 @@
   <title>Cotización</title>
   <link rel="stylesheet" href="assets/css/estilos.css">
 </head>
-
-
 <body>
 
 <header class="header">
   <h2>Sistema de Cotizaciones Transmova</h2>
   <nav>
+    <a href="Menu.html">Menú</a>
+    <a href="Proveedores.html">Proveedores</a>
     <a href="Cliente.html">Clientes</a>
     <a href="Producto.html">Productos</a>
     <a href="Cotizacion.html">Nueva cotización</a>
+    <a href="Correcciones.html">Correcciones</a>
     <a href="historial.html">Histórico</a>
-    <a href="Menu.html">Menú</a>
-    
+    <a href="aprobaciones.html" id="menuAprobaciones">Aprobaciones</a>
   </nav>
 </header>
 
-<h1>Nueva Cotización</h1>
+<div class="container">
 
-<h3>Datos de la cotización</h3>
+  <h1>Nueva Cotización</h1>
 
-<table width="100%">
-<tr>
-<td>
+  <!-- =========================
+       BLOQUE SUPERIOR (2 COLUMNAS)
+  ========================== -->
+  <div class="grid-2">
 
-<label>Cliente</label><br>
-<select id="clienteSelect"></select><br><br>
+    <!-- 🔹 DATOS COTIZACIÓN -->
+    <div class="card">
+      <h3>Datos de la cotización</h3>
 
-<label>Evento</label><br>
-<input type="text" id="evento"><br><br>
+      <div class="form-group">
+        <label>Cliente</label>
+        <select id="clienteSelect"></select>
+      </div>
 
-<label>Ciudad de ejecución</label><br>
-<input type="text" id="ciudad"><br><br>
+      <div class="form-group">
+        <label>Evento</label>
+        <input type="text" id="evento">
+      </div>
 
-</td>
+      <div class="form-group">
+        <label>Ciudad de ejecución</label>
+        <input type="text" id="ciudad">
+      </div>
 
-<td>
+      <div class="form-group">
+        <label>Fecha de solicitud</label>
+        <input type="date" id="fechaSolicitud">
+      </div>
 
-<label>Fecha de solicitud</label><br>
-<input type="date" id="fechaSolicitud"><br><br>
+      <div class="form-group">
+        <label>Fecha inicial</label>
+        <input type="date" id="fechaInicial">
+      </div>
 
-<label>Fecha inicial</label><br>
-<input type="date" id="fechaInicial"><br><br>
+      <div class="form-group">
+        <label>Fecha final</label>
+        <input type="date" id="fechaFinal">
+      </div>
 
-<label>Fecha final</label><br>
-<input type="date" id="fechaFinal"><br><br>
+      <div class="form-group">
+        <label>Forma de pago</label>
+        <select id="formaPago">
+          <option value="">Seleccione</option>
+          <option value="Contado">Contado</option>
+          <option value="Credito">Crédito</option>
+        </select>
+      </div>
+    </div>
 
-<label>Forma de pago</label><br>
-<select id="formaPago">
-<option value="">Seleccione</option>
-<option value="Contado">Contado</option>
-<option value="Credito">Crédito</option>
-</select>
+    <!-- 🔹 AGREGAR PRODUCTO -->
+    <div class="card">
+      <h3>Agregar producto</h3>
+<div class="form-group">
+  <label>Producto</label>
+  <select id="productoSelect"></select>
+</div>
 
-</td>
-</tr>
-</table>
+<div class="form-group">
+  <label>Costo</label>
+  <input type="number" id="costo" disabled>
+</div>
 
-<hr>
+<div class="form-group">
+  <label>Venta</label>
+  <input type="number" id="venta" step="0.01">
+</div>
 
-<h3>Agregar producto</h3>
+<div class="form-group">
+  <label>Rentabilidad (%)</label>
+  <input type="text" id="rentabilidad" disabled>
+</div>
 
-<table width="100%">
-<tr>
+<div class="form-group">
+  <label>Descripción</label>
+  <input type="text" id="descripcion">
+</div>
 
-<td>
-<label>Producto</label><br>
-<select id="productoSelect"></select>
-</td>
+<div class="form-group">
+  <label>Cantidad</label>
+  <input type="number" id="cantidad" value="1">
+</div>
 
-<td>
-<label>Precio</label><br>
-<input type="number" id="precio" step="0.01">
-</td>
+      <button class="btn" onclick="agregarProducto()">
+        ➕ Agregar producto
+      </button>
+    </div>
 
-<td>
-<label>Unidad</label><br>
-<input type="text" id="unidad">
-</td>
+  </div>
 
-<td>
-<label>Cantidad</label><br>
-<input type="number" id="cantidad" value="1">
-</td>
+  <!-- =========================
+       DETALLE (FULL WIDTH)
+  ========================== -->
+  <div class="card">
+    <h2>Detalle de la cotización</h2>
 
-<td style="vertical-align:bottom;">
-<button onclick="agregarProducto()">Agregar producto</button>
-</td>
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Descripción</th>
+          <th>Cantidad</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="detalleCotizacion"></tbody>
+    </table>
 
-</tr>
-</table>
+    <h3 style="margin-top: 15px;">
+      Total Cotización: $<span id="totalCotizacion">0</span>
+    </h3>
+  </div>
 
-<br>
+  <!-- =========================
+       ACCIONES
+  ========================== -->
+  <!-- BOTÓN -->
+  <div class="card">
+    <button class="btn" onclick="guardarCotizacion()">
+      💾 Guardar y generar PDF
+    </button>
+  </div>
 
-<button onclick="guardarCotizacion()">Guardar cotización y generar PDF</button>
-
-<hr>
-
-<h2>Detalle</h2>
-
-<table border="1" width="100%">
-<thead>
-<tr>
-<th>Producto</th>
-<th>Precio</th>
-<th>Unidad</th>
-<th>Cantidad</th>
-<th>Total</th>
-</tr>
-</thead>
-
-<tbody id="detalleCotizacion"></tbody>
-
-</table>
-
-<h3>Total Cotización: $<span id="totalCotizacion">0</span></h3>
-
-<hr>
+</div>
 
 <script type="module" src="assets/auth.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script type="module" src="assets/cotizaciones.js" defer></script>
+<script type="module" src="assets/cotizaciones.js"></script>
+<script type="module" src="assets/roles.js"></script>
 
 </body>
 </html>
