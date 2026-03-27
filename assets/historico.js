@@ -8,7 +8,16 @@ window.cargarCotizaciones = async function () {
 
   let query = supabase
     .from("cotizaciones")
-    .select("id,consecutivo, fecha, total, pdf_url, parent_id1, version")
+    .select(`
+  id,
+  consecutivo,
+  fecha,
+  total,
+  pdf_url,
+  parent_id1,
+  version,
+  detalle_cotizacion(costo, precio, cantidad)
+`)
     .eq("estado", "aprobada")
     .order("fecha", { ascending: false });
 
@@ -28,27 +37,43 @@ window.cargarCotizaciones = async function () {
   if (!data || data.length === 0) {
     tabla.innerHTML = `
       <tr>
-        <td colspan="4" style="text-align:center">No hay cotizaciones</td>
+        <td colspan="8" style="text-align:center">No hay cotizaciones</td>
       </tr>`;
     return;
   }
 
   data.forEach(c => {
 
+    let costoTotal = 0;
+let ventaTotal = 0;
+
+c.detalle_cotizacion?.forEach(d => {
+  costoTotal += (Number(d.costo) || 0) * (Number(d.cantidad) || 0);
+  ventaTotal += (Number(d.precio) || 0) * (Number(d.cantidad) || 0);
+});
+
+const rentabilidad = costoTotal > 0
+  ? ((ventaTotal - costoTotal) / costoTotal) * 100
+  : 0;
+
+
     const botonPdf = `
       <button onclick="verPDF('${c.id}')">📄</button>
     `;
 
     const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${c.consecutivo}</td>
-      <td>${c.fecha}</td>
-      <td>$${Number(c.total).toLocaleString("es-CO")}</td>
-      <td>${botonPdf}</td>
-      <td>
-        <button onclick='verHistorial(${JSON.stringify(c)})'>📜</button>
-      </td>
-    `;
+   tr.innerHTML = `
+  <td>${c.consecutivo}</td>
+  <td>${c.fecha}</td>
+  <td>$${costoTotal.toLocaleString("es-CO")}</td>
+  <td>$${ventaTotal.toLocaleString("es-CO")}</td>
+  <td>${rentabilidad.toFixed(2)} %</td>
+  <td>$${Number(c.total).toLocaleString("es-CO")}</td>
+  <td>${botonPdf}</td>
+  <td>
+    <button onclick='verHistorial(${JSON.stringify(c)})'>📜</button>
+  </td>
+`;
 
     tabla.appendChild(tr);
   });
@@ -66,7 +91,13 @@ window.verHistorial = async function (cotizacion) {
 
   const { data, error } = await supabase
     .from("cotizaciones")
-    .select("consecutivo, fecha, total, pdf_url, version")
+    .select(`
+      consecutivo,
+      fecha,
+      total,
+      version,
+      detalle_cotizacion(costo, precio, cantidad)
+    `)
     .or(`id.eq.${baseId},parent_id1.eq.${baseId}`)
     .order("version", { ascending: true });
 
@@ -75,17 +106,46 @@ window.verHistorial = async function (cotizacion) {
     return;
   }
 
-  let contenido = "HISTORIAL:\n\n";
+  const contenedor = document.getElementById("contenidoHistorial");
+  contenedor.innerHTML = "";
 
   data.forEach(item => {
+
+    let costoTotal = 0;
+    let ventaTotal = 0;
+
+    item.detalle_cotizacion?.forEach(d => {
+      costoTotal += (Number(d.costo) || 0) * (Number(d.cantidad) || 0);
+      ventaTotal += (Number(d.precio) || 0) * (Number(d.cantidad) || 0);
+    });
+
+    const rentabilidad = costoTotal > 0
+      ? ((ventaTotal - costoTotal) / costoTotal) * 100
+      : 0;
+
     const tipo = item.version === 0
       ? "Original"
       : `Versión ${item.version}`;
 
-    contenido += `${tipo} - ${item.consecutivo} - $${Number(item.total).toLocaleString("es-CO")}\n`;
+    const clase = rentabilidad < 15 ? "baja" : "alta";
+
+    const div = document.createElement("div");
+    div.className = `card-historial ${clase}`;
+
+    div.innerHTML = `
+      <strong>${tipo}</strong><br>
+      <b>Consecutivo:</b> ${item.consecutivo}<br>
+      <b>Fecha:</b> ${item.fecha}<br>
+      <b>Costo:</b> $${costoTotal.toLocaleString("es-CO")}<br>
+      <b>Venta:</b> $${ventaTotal.toLocaleString("es-CO")}<br>
+      <b>Rentabilidad:</b> ${rentabilidad.toFixed(2)} %<br>
+      <b>Total:</b> $${Number(item.total).toLocaleString("es-CO")}
+    `;
+
+    contenedor.appendChild(div);
   });
 
-  alert(contenido);
+  document.getElementById("modalHistorial").style.display = "block";
 };
 
 /* =========================
@@ -112,4 +172,15 @@ window.verPDF = async function(id) {
   }
 
   window.open(data.pdf_url, "_blank");
+};
+
+window.cerrarModal = function () {
+  document.getElementById("modalHistorial").style.display = "none";
+};
+
+window.onclick = function (event) {
+  const modal = document.getElementById("modalHistorial");
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
 };

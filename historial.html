@@ -10,7 +10,7 @@
 <body>
 
 <header class="header">
-  <h2>Sistema de Cotizaciones Transmova</h2>
+  <h1>Sistema de Cotizaciones Transmova</h1>
   <nav>
     <a href="Menu.html">Menú</a>
     <a href="Proveedores.html">Proveedores</a>
@@ -20,6 +20,8 @@
     <a href="Correcciones.html">Correcciones</a>
     <a href="historial.html">Histórico</a>
     <a href="aprobaciones.html" id="menuAprobaciones">Aprobaciones</a>
+    <a href="dashboard.html">Dashboard</a>
+    
 
   </nav>
 </header>
@@ -28,15 +30,16 @@
   <h1>Historial de Cotizaciones</h1>
 
   <label>Filtrar por mes:</label>
-  <input type="month" id="filtroMes" onchange="cargarCotizaciones()">
-
-  <br><br>
+  <input type="month" id="filtroMes" onchange="cargarCotizaciones()" style="width: 18%;">
 
   <table border="1">
     <thead>
       <tr>        
         <th>Consecutivo</th>
         <th>Fecha</th>
+        <th>Costo</th>
+        <th>Venta</th>
+        <th>Rentabilidad</th>
         <th>Total</th>
         <th>PDF</th>
         <th>Versiones</th>
@@ -49,6 +52,17 @@
   <script type="module" src="assets/historico.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script type="module" src="assets/roles.js"></script>
+
+<!-- =========================
+     MODAL HISTORIAL
+========================= -->
+<div id="modalHistorial" class="modal">
+  <div class="modal-contenido">
+    <span class="cerrar-modal" onclick="cerrarModal()">&times;</span>
+    <h2>Historial de versiones</h2>
+    <div id="contenidoHistorial"></div>
+  </div>
+</div>
 
 
 </body>

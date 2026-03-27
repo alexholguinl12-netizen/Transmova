@@ -1,3 +1,16 @@
+:root {
+  --color-primary: #2563eb;
+  --color-primary-dark: #1d4ed8;
+  --color-bg: #f8fafc;
+  --color-card: #ffffff;
+  --color-border: #e5e7eb;
+  --color-text: #0f172a;
+  --color-muted: #64748b;
+  --color-success: #16a34a;
+  --color-danger: #dc2626;
+}
+
+
 /* ==========================
    RESET Y BASE
 ========================== */
@@ -9,9 +22,9 @@
 }
 
 body {
-  background-color: #f4f6f8;
-  color: #333;
-  padding: 20px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
 h1, h2, h3 {
@@ -26,26 +39,22 @@ h1, h2, h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #ffffff;
-  border-bottom: 1px solid #ccc;
-  padding: 10px 20px;
-  margin-bottom: 20px;
-}
-
-.header h2 {
-  font-size: 16px;
-  margin: 0;
+  background: var(--color-card);
+  padding: 15px 25px;
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 .header nav a {
-  margin-left: 15px;
+  margin-left: 20px;
   font-size: 14px;
-  color: #2c3e50;
+  color: var(--color-muted);
   text-decoration: none;
+  transition: 0.2s;
 }
 
 .header nav a:hover {
-  text-decoration: underline;
+  color: var(--color-primary);
 }
 
 /* ==========================
@@ -120,18 +129,17 @@ h1, h2, h3 {
 label {
   font-size: 13px;
 }
-
 input, select {
-  width: 250px;
-  padding: 6px;
-  font-size: 13px;
-  margin-bottom: 10px;
-  border: 1px solid #bbb;
-  border-radius: 3px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  font-size: 14px;
 }
 
-input[type="number"] {
-  width: 120px;
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--color-primary);
 }
 
 /* ==========================
@@ -235,12 +243,11 @@ hr {
    TARJETAS (FORMULARIOS / TABLAS)
 ========================== */
 .card {
-  background: #ffffff;
+  background: var(--color-card);
   padding: 20px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
 }
 
 /* ==========================
@@ -271,18 +278,19 @@ hr {
    BOTONES MODERNOS
 ========================== */
 .btn {
-  background: #2563eb;
+  background: var(--color-primary);
   color: white;
   border: none;
-  padding: 10px 14px;
-  border-radius: 6px;
+  padding: 10px 16px;
+  border-radius: 8px;
   font-size: 14px;
   cursor: pointer;
   transition: 0.2s;
 }
 
 .btn:hover {
-  background: #1d4ed8;
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
 }
 
 /* ==========================
@@ -291,22 +299,22 @@ hr {
 .tabla {
   width: 100%;
   border-collapse: collapse;
+  background: var(--color-card);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .tabla th {
   background: #f1f5f9;
-  font-size: 13px;
-  color: #333;
+  color: var(--color-muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .tabla td {
-  font-size: 13px;
-}
-
-.tabla th,
-.tabla td {
-  padding: 8px;
-  border-bottom: 1px solid #e5e7eb;
+  padding: 10px;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .tabla tr:hover {
@@ -429,4 +437,98 @@ hr {
 
 .tabla tr:hover {
   background: #f9fafb;
+}
+
+/* =========================
+   MODAL
+========================= */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-contenido {
+  background: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  width: 600px;
+  max-width: 90%;
+  border-radius: 10px;
+  position: relative;
+}
+
+.cerrar-modal {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* tarjetas dentro del modal */
+.card-historial {
+  border: 1px solid #ddd;
+  border-left: 5px solid #2563eb;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  background: #f9fafb;
+}
+
+.card-historial.alta {
+  border-left-color: #16a34a;
+}
+
+.card-historial.baja {
+  border-left-color: #dc2626;
+}
+
+/* =========================
+   MEJORAS PRO CLIENTES
+========================= */
+
+h1 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.card h3 {
+  margin-bottom: 15px;
+}
+
+.tabla th {
+  text-align: center;
+}
+
+.tabla td {
+  vertical-align: middle;
+}
+
+.btn-editar,
+.btn-eliminar {
+  margin-right: 5px;
+}
+
+.acciones {
+  margin-top: 15px;
+}
+
+button, .card {
+  transition: all 0.2s ease;
+}
+
+.card h1 {
+  font-size: 28px;
+  margin-top: 10px;
+}
+
+.card h3 {
+  color: var(--color-muted);
+  font-size: 14px;
 }

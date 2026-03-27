@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+
+<body>
+
+<header class="header">
+  <h2>Dashboard Transmova</h2>
+  <nav>
+   <a href="Menu.html">Menú</a>
+    <a href="Proveedores.html">Proveedores</a>
+    <a href="Cliente.html">Clientes</a>
+    <a href="Producto.html">Productos</a>
+    <a href="Cotizacion.html">Nueva cotización</a>
+    <a href="Correcciones.html">Correcciones</a>
+    <a href="historial.html">Histórico</a>
+    <a href="aprobaciones.html" id="menuAprobaciones">Aprobaciones</a>
+    <a href="dashboard.html">Dashboard</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <!-- KPIs -->
+  <div class="grid-2">
+
+    <div class="card">
+      <h3>Ventas</h3>
+      <h1 id="kpiVentas">$0</h1>
+    </div>
+
+    <div class="card">
+      <h3>Costos</h3>
+      <h1 id="kpiCostos">$0</h1>
+    </div>
+
+    <div class="card">
+      <h3>Rentabilidad</h3>
+      <h1 id="kpiRentabilidad">0%</h1>
+    </div>
+
+    <div class="card">
+      <h3>Cotizaciones</h3>
+      <h1 id="kpiCantidad">0</h1>
+    </div>
+
+    <div class="card">
+       <h3>Rentabilidad vs mes anterior</h3>
+       <h1 id="kpiVariacion">0%</h1>
+    </div>
+
+    <div class="card">
+       <h3>Rentabilidad promedio</h3>
+       <h1 id="kpiPromedio">0%</h1>
+    </div>
+
+
+  </div>
+
+  <br>
+
+  <!-- GRÁFICO -->
+  <div class="card">
+    <h2>Ventas por mes</h2>
+    <canvas id="graficoVentas"></canvas>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="assets/dashboard.js"></script>
+
+</body>
+</html>

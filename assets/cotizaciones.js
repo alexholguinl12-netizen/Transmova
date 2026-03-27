@@ -17,8 +17,9 @@ function formatoCOP(valor) {
 async function cargarClientes() {
 
   const { data, error } = await supabase
-    .from("clientes")
-    .select("id, nombre_contacto, empresa");
+  .from("clientes")
+.select("id, nombre_contacto, empresa, productor")
+.eq("activo", true);
 
   if (error) {
     console.error(error);
@@ -26,25 +27,18 @@ async function cargarClientes() {
   }
 
   const select = document.getElementById("clienteSelect");
-
   if (!select) return;
 
   select.innerHTML = `<option value="">-- Seleccione cliente --</option>`;
 
   data.forEach(c => {
-
     const opt = document.createElement("option");
-
     opt.value = c.id;
-    opt.textContent = c.empresa || c.nombre_contacto;
-
+    opt.textContent = `${c.empresa || c.nombre_contacto} [${c.productor || "Sin Productor"}]`;
     opt.dataset.empresa = c.empresa || "";
     opt.dataset.contacto = c.nombre_contacto || "";
-
     select.appendChild(opt);
-
   });
-
 }
 
 /* =========================
@@ -111,8 +105,11 @@ document.addEventListener("input", (e) => {
 
   if (e.target.id === "venta") {
 
-    const costo = Number(document.getElementById("costo").value);
-    const venta = Number(e.target.value);
+const costo = Number(
+  document.getElementById("costo").value.replace(/\./g, "")
+);
+    const venta = Number( e.target.value.replace(/\./g, "")
+);
 
     if (!costo || !venta) {
       document.getElementById("rentabilidad").value = "";
@@ -133,7 +130,7 @@ document.addEventListener("input", (e) => {
 ========================= */
 window.agregarProducto = function () {
   const prodSel = document.getElementById("productoSelect");
-  const costo = parseFloat(document.getElementById("costo").value);
+  const costo = Number(document.getElementById("costo").value);
   const venta = Number(document.getElementById("venta").value);
   const descripcion = document.getElementById("descripcion").value;
   const cantidad = Number(document.getElementById("cantidad").value);
@@ -200,21 +197,28 @@ document.addEventListener("click", e => {
    CONSECUTIVO
 ========================= */
 async function obtenerConsecutivoMensual() {
+
   const hoy = new Date();
   const mes = String(hoy.getMonth() + 1).padStart(2, "0");
   const anio = hoy.getFullYear();
+
   const inicio = `${anio}-${mes}-01`;
   const ultimoDia = new Date(anio, mes, 0).getDate();
   const fin = `${anio}-${mes}-${String(ultimoDia).padStart(2, "0")}`;
-  const { count } = await supabase
+
+  const { count, error } = await supabase
     .from("cotizaciones")
     .select("*", { count: "exact", head: true })
     .gte("fecha", inicio)
     .lte("fecha", fin);
 
+  if (error) {
+    console.error(error);
+    return "01-" + mes;
+  }
+
   return `${String(count + 1).padStart(2, "0")}-${mes}`;
 }
-
 /* =========================
    GUARDAR + PDF + STORAGE
 ========================= */
@@ -239,21 +243,7 @@ let version = 0;
 if (window.cotizacionPadre) {
    await guardarCorreccion (window.cotizacionPadre);
    return;
-  // contar hijos existentes
-  const { data: hijos, error } = await supabase
-    .from("cotizaciones")
-    .select("id")
-    .eq("parent_id1", parent_id1);
-
-  if (error) {
-    console.error("Error contando hijos:", error);
-  }
-
-  version = (hijos?.length || 0) + 1;
-  const base = window.cotizacionPadre.consecutivo;
-  const versionStr = String(version).padStart(2, "0");
-  consecutivo = `${base}-${versionStr}`;
-
+ 
 } else {
   //  normal
   consecutivo = await obtenerConsecutivoMensual();
@@ -261,7 +251,7 @@ if (window.cotizacionPadre) {
 
   const fecha = new Date().toISOString().split("T")[0];
 
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from("cotizaciones")
    .insert([{
   cliente_id: clienteSelect.value,
@@ -282,6 +272,12 @@ if (window.cotizacionPadre) {
 }])
     .select()
     .single();
+
+    if (error) {
+  console.error("❌ ERROR INSERT:", error);
+  alert("Error al guardar cotización");
+  return;
+}
 
     /* =========================
    GUARDAR DETALLE
@@ -506,10 +502,12 @@ detalleCotizacion.forEach((item, index) => {
   doc.setFontSize(9);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8);
-    const nota = "NOTA: LOS DÍAS COTIZADOS SON POR 12 HORAS DE OPERACIÓN - INCLUYE CONDUCTOR Y COMBUSTIBLE. LAS HORAS ADICIONALES SERÁN COBRADAS BAJO REAL EJECUTADO AL FINALIZAR EL PROYECTO.";
+    const nota = "Por favor hacer transferencia a: Cuenta Ahorros N° 743-000034-00 De Bancolombia a Nombre de TRANSMOVA S.A.S. Nit 901.860.451-6";
+    const nota1 = "NOTA: LOS DÍAS COTIZADOS SON POR 12 HORAS DE OPERACIÓN - INCLUYE CONDUCTOR Y COMBUSTIBLE. LAS HORAS ADICIONALES SERÁN COBRADAS BAJO REAL EJECUTADO AL FINALIZAR EL PROYECTO.";
     const textoAjustado = doc.splitTextToSize(nota, 180);
-  doc.text(textoAjustado, 105, 285, { align: "center" });
-
+    const textoAjustado1 = doc.splitTextToSize(nota1, 180);
+  doc.text(textoAjustado, 105, 275, { align: "center" });
+  doc.text(textoAjustado1, 105, 285, { align: "center" });
   return {
     doc,
     blob: doc.output("blob")
@@ -685,10 +683,10 @@ if (idPendiente) {
   const { data: cot, error } = await supabase
     .from("cotizaciones")
     .select(`
-      *,
-      clientes(nombre_contacto, empresa),
-      detalle_cotizacion( *, productos(nombre_producto))
-    `)
+  *,
+  clientes(nombre_contacto, empresa, productor),
+  detalle_cotizacion(*, productos(nombre_producto))
+`)
     .eq("id", idPendiente)
     .single();
 

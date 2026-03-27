@@ -189,17 +189,3 @@ async function cargarProveedoresSelect() {
 
   });
 }
-
-/* =========================
-   ELIMINAR PRODUCTO
-========================= */
-window.eliminarProducto = async function (id) {
-  if (!confirm("¿Eliminar producto?")) return;
-
-  await supabase
-    .from("productos")
-    .delete()
-    .eq("id", id);
-
-  cargarProductos();
-};

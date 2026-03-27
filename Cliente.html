@@ -9,9 +9,9 @@
 <body>
 
 <header class="header">
-  <div class="header-left">
-    <img src="assets/img/logo.png" alt="Logo" class="logo">
-    <h2>Sistema de Cotizaciones</h2>
+<!--  <div class="header-left"> 
+    <img src="assets/img/logo.png" alt="Logo" class="logo"> -->
+    <h1>Sistema de Cotizaciones Transmova</h1>
   </div>
 
   <nav>
@@ -23,51 +23,55 @@
     <a href="Correcciones.html">Correcciones</a>
     <a href="historial.html">Histórico</a>
     <a href="aprobaciones.html" id="menuAprobaciones">Aprobaciones</a>
+    <a href="dashboard.html">Dashboard</a>
     
   </nav>
 </header>
 
 
 
-<h2>Registro de Cliente</h2>
+<div class="container">
 
-<form id="formCliente">
-  <input id="nombre_contacto" placeholder="Nombre contacto" required><br>
-  <input id="empresa" placeholder="Empresa"><br>
-  <input id="telefono" placeholder="Teléfono empresa"><br>
-  <input id="email" placeholder="Email" required><br>
-  <input id="telefono_contacto" placeholder="Teléfono contacto"><br>
-  <input id="nit" placeholder="NIT"><br>
-  <input id="ciudad" placeholder="ciudad"><br><br>
+  <div class="card">
+    <h2>Registro de Cliente</h2>
 
-<button type="button" onclick="guardarCliente()">Guardar cliente</button>
+    <div class="grid-2">
+      <input id="nombre_contacto" placeholder="Nombre contacto">
+      <input id="empresa" placeholder="Empresa">
+      <input id="telefono" placeholder="Teléfono empresa">
+      <input id="email" placeholder="Email">
+      <input id="telefono_contacto" placeholder="Teléfono contacto">
+      <input id="productor" placeholder="Productor">
+      <input id="nit" placeholder="NIT">
+      <input id="ciudad" placeholder="Ciudad">
+    </div>
 
-</form>
+    <div class="acciones">
+      <button class="btn" onclick="guardarCliente()">Guardar cliente</button>
+    </div>
 
-<hr>
+  </div>
 
-<h2>Clientes guardados</h2>
+  <div class="card">
+    <h2>Clientes registrados</h2>
 
-<ul id="listaClientes">
-  <!-- aquí se cargarán los clientes -->
-</ul>
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Empresa</th>
+          <th>Productor</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+        </tr>
+      </thead>
+      <tbody id="tablaClientes"></tbody>
+    </table>
+  </div>
 
+</div>
 
 
 <script type="module" src="assets/auth.js"></script>
 <script type="module" src="assets/clientes.js"></script>
 <script type="module" src="assets/roles.js"></script>
-
-
-<script>
-  document.getElementById("formCliente").addEventListener("submit", function (e) {
-    e.preventDefault();
-    guardarCliente();
-  });
-</script>
-
-</body>
-
-<div id="mensaje"></div>
-
-</html>
