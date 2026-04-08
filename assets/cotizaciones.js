@@ -48,7 +48,7 @@ async function cargarProductos() {
 
   const { data, error } = await supabase
     .from("productos")
-    .select("id, nombre_producto, costo, descripcion");
+    .select("id, nombre_producto, costo, descripcion, proveedor_id");
 
   if (error) {
     console.error(error);
@@ -92,6 +92,42 @@ document.addEventListener("change", e => {
 
     if (costoInput) costoInput.value = prod.costo || 0;
     if (unidadInput) unidadInput.value = prod.descripcion || "";
+
+  }
+
+});
+
+
+/* =========================
+   FILTRAR PRODUCTOS POR PROVEEDOR
+========================= */
+document.addEventListener("change", (e) => {
+
+  if (e.target.id === "proveedorSelect") {
+
+    const proveedorId = e.target.value;
+
+    const selectProductos = document.getElementById("productoSelect");
+
+    // limpiar productos
+    selectProductos.innerHTML = `<option value="">-- Producto --</option>`;
+
+    const filtrados = proveedorId
+      ? productosCache.filter(p => p.proveedor_id == proveedorId)
+      : productosCache;
+
+    filtrados.forEach(p => {
+
+      const opt = document.createElement("option");
+      opt.value = p.id;
+      opt.textContent = p.nombre_producto;
+
+      selectProductos.appendChild(opt);
+
+    });
+
+    // 🔥 BONUS: limpiar selección previa
+    selectProductos.value = "";
 
   }
 
@@ -623,6 +659,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   ========================= */
 
   await cargarClientes();
+  await cargarProveedores();
   await cargarProductos();
   window.logoBase64 = await cargarImagenBase64("assets/img/logo.png");
   /* =========================
@@ -736,3 +773,30 @@ document.getElementById("formaPago").value = cot.forma_pago || "";
   alert("✅ PDF generado automáticamente");
 }
 });
+
+
+async function cargarProveedores() {
+
+  const { data, error } = await supabase
+    .from("proveedores")
+    .select("id, razon_social");
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  const select = document.getElementById("proveedorSelect");
+
+  if (!select) return;
+
+  select.innerHTML = `<option value="">-- Seleccione proveedor --</option>`;
+
+  data.forEach(p => {
+    const opt = document.createElement("option");
+    opt.value = p.id;
+    opt.textContent = p.razon_social;
+    select.appendChild(opt);
+  });
+
+}
