@@ -379,6 +379,10 @@ window.generarPDF = function (consecutivo, clienteSelect) {
   const doc = new jsPDF();
   const cliente = clienteSelect.selectedOptions[0].dataset.contacto || "—";
   const empresa = clienteSelect.selectedOptions[0].dataset.empresa || "—";
+  const productor = clienteSelect.selectedOptions[0].dataset.productor || "";
+  const empresaFinal = productor 
+  ? `${empresa} - ${productor}`
+  : empresa;
   const evento = document.getElementById("evento").value || "-";
   const ciudad = document.getElementById("ciudad").value || "-";
   const fechaSolicitud = document.getElementById("fechaSolicitud").value || "-";
@@ -422,11 +426,13 @@ window.generarPDF = function (consecutivo, clienteSelect) {
   doc.text("Cliente:", 10, y);
   doc.setFont("helvetica", "normal");
   doc.text(cliente, 35, y);
-    y += 6;
-  doc.setFont("helvetica", "bold");
-  doc.text("Empresa:", 10, y);
-  doc.setFont("helvetica", "normal");
-  doc.text(empresa, 35, y);
+ y += 6;
+
+doc.setFont("helvetica", "bold");
+doc.text("Empresa:", 10, y);
+
+doc.setFont("helvetica", "normal");
+doc.text(doc.splitTextToSize(empresaFinal, 150), 35, y);
     y += 6;
   doc.setFont("helvetica", "bold");
   doc.text("Fecha:", 10, y);
